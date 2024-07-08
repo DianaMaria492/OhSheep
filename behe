@@ -1,0 +1,131 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sheep Vibe</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        background-color: #FFB6C1;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+    }
+
+    .container {
+        position: relative;
+        text-align: center;
+    }
+
+    .sheep-image {
+        width: 500px; /* Increased size */
+        cursor: pointer;
+        transition: transform 0.2s ease-in-out;
+    }
+
+    .sheep-image:hover {
+        transform: scale(1.1); /* Zoom in a bit on hover */
+    }
+
+    .message {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: rgba(255, 255, 255, 0.9);
+        padding: 20px;
+        border-radius: 10px;
+        display: none;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        max-width: 80%;
+        font-size: 24px; /* Larger text */
+    }
+
+    .message.active {
+        display: block;
+    }
+
+    .heart {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        transform: rotate(-45deg);
+        animation: float 5s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+        content: '';
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        background-color: red;
+        border-radius: 50%;
+    }
+
+    .heart::before {
+        top: -10px;
+        left: 0;
+    }
+
+    .heart::after {
+        left: 10px;
+        top: 0;
+    }
+
+    @keyframes float {
+        0% {
+            transform: translateY(0) rotate(-45deg);
+            opacity: 1;
+        }
+        100% {
+            transform: translateY(-1000px) rotate(-45deg);
+            opacity: 0;
+        }
+    }
+</style>
+</head>
+<body>
+<div class="container">
+    <img src="https://www.creativecenter.brother/-/media/creativecenter/contents/home/home/home-category/cards-invitations/valentines-day/sheep-love/sheep-love-cards-invitations-l-en.ashx" alt="Sheep Image" class="sheep-image" id="sheepImage">
+    <div class="message" id="message">You can do it, just be in the sheep's vibe</div>
+</div>
+
+<script>
+    // Select the sheep image and the message element
+    const sheepImage = document.getElementById('sheepImage');
+    const message = document.getElementById('message');
+
+    // Add click event listener to the sheep image
+    sheepImage.addEventListener('click', () => {
+        // Toggle the 'active' class on the message to display it
+        message.classList.toggle('active');
+
+        // Create hearts
+        for (let i = 0; i < 100; i++) {
+            createHeart();
+        }
+    });
+
+    function createHeart() {
+        const heart = document.createElement('div');
+        heart.classList.add('heart');
+        heart.style.left = Math.random() * 100 + 'vw';
+        heart.style.animationDuration = Math.random() * 2 + 3 + 's';
+        document.body.appendChild(heart);
+
+        setTimeout(() => {
+            heart.remove();
+        }, 5000);
+    }
+</script>
+</body>
+</html>
